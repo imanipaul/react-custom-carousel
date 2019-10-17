@@ -1,10 +1,9 @@
 import React from "react";
-import logo from "./logo.svg";
 import CustomCarousel from "./Component/index";
 import yarn from "./yarn.png";
 import lambs from "./lambs.png";
 import sheep from "./sheep-herd.png";
-import "./App.css";
+// import "./App.css";
 
 function App() {
   return (
@@ -15,6 +14,7 @@ function App() {
         img3={sheep}
         width={940}
         height={525}
+        dots={true}
       />
     </div>
   );

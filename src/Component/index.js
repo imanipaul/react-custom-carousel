@@ -53,10 +53,6 @@ class CustomCarousel extends React.Component {
     });
   }
 
-  incrementDot() {
-    let dots = document.querySelectorAll(".dots");
-  }
-
   nextSlide(index) {
     clearInterval(this.state.counterInterval);
     clearInterval(this.state.slideInterval);
@@ -86,8 +82,10 @@ class CustomCarousel extends React.Component {
   }
 
   componentDidMount() {
-    this.state.counterInterval = setInterval(this.incrementValue, 3000);
-    this.state.slideInterval = setInterval(this.incrementSlide, 3000);
+    this.setState({
+      counterInterval: setInterval(this.incrementValue, 3000),
+      slideInterval: setInterval(this.incrementSlide, 3000)
+    });
   }
 
   componentWillUnmount() {

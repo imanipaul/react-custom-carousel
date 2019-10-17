@@ -16,3 +16,5 @@ three images (img1, img2, img3)
 
 width: width of carousel
 height: height of carousel
+
+dots: boolean value

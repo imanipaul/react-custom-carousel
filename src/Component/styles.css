@@ -10,11 +10,8 @@
 }
 
 .carousel-dots {
-  /* grid-column: 19/22; */
   display: flex;
   flex-direction: row;
-
-  grid-column: 6/-6;
   margin: auto;
 }
 
@@ -24,7 +21,6 @@
 
 .carousel-container {
   position: relative;
-  margin: 5vw auto 2vw auto;
   list-style-type: none;
   height: 500px;
   width: 60%;
