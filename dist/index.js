@@ -1,7 +1,7 @@
 import React from "react";
-import yarn from "./yarn.png";
-import lambs from "./lambs.png";
-import sheep from "./sheep-herd.png";
+import "./styles.css"; // import yarn from "./yarn.png";
+// import lambs from "./lambs.png";
+// import sheep from "./sheep-herd.png";
 
 class CustomCarousel extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class CustomCarousel extends React.Component {
 
   incrementSlide() {
     let slides = document.querySelectorAll(".carousel-slides");
-    let dots = document.querySelectorAll('.dot');
+    let dots = document.querySelectorAll(".dot");
     let value = this.state.currentSlide;
     slides.forEach(function (slide, index) {
       if (index === value) {
@@ -41,15 +41,15 @@ class CustomCarousel extends React.Component {
     });
     dots.forEach(function (dot, index) {
       if (index === value) {
-        return dot.classList.toggle('current-dot');
+        return dot.classList.toggle("current-dot");
       } else {
-        return dot.classList.remove('current-dot');
+        return dot.classList.remove("current-dot");
       }
     });
   }
 
   incrementDot() {
-    let dots = document.querySelectorAll('.dots');
+    let dots = document.querySelectorAll(".dots");
   }
 
   nextSlide(index) {
@@ -67,17 +67,17 @@ class CustomCarousel extends React.Component {
     slides.forEach(function (slide) {
       return slide.classList.remove("showing");
     });
-    slides[val - 1].classList.add('showing');
+    slides[val - 1].classList.add("showing");
   }
 
   setDot(val) {
-    let dots = document.querySelectorAll('.dot');
+    let dots = document.querySelectorAll(".dot");
     dots.forEach(function (dot) {
       return dot.classList.remove("current-dot");
     });
-    console.log('dots: ', dots);
-    console.log('dots val: ', dots[val - 1]);
-    dots[val - 1].classList.add('current-dot');
+    console.log("dots: ", dots);
+    console.log("dots val: ", dots[val - 1]);
+    dots[val - 1].classList.add("current-dot");
   }
 
   componentDidMount() {
@@ -99,19 +99,19 @@ class CustomCarousel extends React.Component {
       className: "carousel-slides showing"
     }, React.createElement("img", {
       className: "carousel",
-      src: lambs,
+      src: this.props.img1,
       alt: ""
     })), React.createElement("div", {
       className: "carousel-slides"
     }, React.createElement("img", {
       className: "carousel",
-      src: yarn,
+      src: this.props.img2,
       alt: ""
     })), React.createElement("div", {
       className: "carousel-slides"
     }, React.createElement("img", {
       className: "carousel",
-      src: sheep,
+      src: this.props.img3,
       alt: ""
     }))), this.props.dots && React.createElement("div", {
       className: "carousel-dots"
