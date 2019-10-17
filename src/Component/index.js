@@ -1,8 +1,5 @@
 import React from "react";
 import "./styles.css";
-// import yarn from "./yarn.png";
-// import lambs from "./lambs.png";
-// import sheep from "./sheep-herd.png";
 
 class CustomCarousel extends React.Component {
   constructor(props) {
@@ -20,16 +17,12 @@ class CustomCarousel extends React.Component {
       counterInterval: 0,
       slideInterval: 0
     };
-
-    // const counterInterval = 0;
-    // const slideInterval = 0;
   }
 
   incrementValue() {
     this.setState(prevState => ({
       currentSlide: (prevState.currentSlide + 1) % this.state.slides.length
     }));
-    console.log(this.state.currentSlide);
   }
 
   incrementSlide() {
@@ -101,16 +94,31 @@ class CustomCarousel extends React.Component {
           style={{ width: this.props.width, height: this.props.height }}
         >
           <div className="carousel-slides showing">
-            <img className="carousel" src={this.props.img1} alt="" />
+            {this.props.img1 ? (
+              <img className="carousel" src={this.props.img1} alt="" />
+            ) : (
+              <video autoplay muted loop controlsList="nodownload">
+                <source src={this.props.vid1} type="video/mp4" />
+              </video>
+            )}
           </div>
           <div className="carousel-slides">
-            {/* <video autoplay muted loop controlsList="nodownload">
-              <source src="videos/carousel-hulu_cutdown.mp4" type="video/mp4" />
-            </video> */}
-            <img className="carousel" src={this.props.img2} alt="" />
+            {this.props.img2 ? (
+              <img className="carousel" src={this.props.img2} alt="" />
+            ) : (
+              <video controlsList="nodownload" autoPlay muted loop>
+                <source src={this.props.vid2} type="video/mp4" />
+              </video>
+            )}
           </div>
           <div className="carousel-slides">
-            <img className="carousel" src={this.props.img3} alt="" />
+            {this.props.img3 ? (
+              <img className="carousel" src={this.props.img3} alt="" />
+            ) : (
+              <video autoplay muted loop controlsList="nodownload">
+                <source src={this.props.vid3} type="video/mp4" />
+              </video>
+            )}
           </div>
         </div>
         {this.props.dots && (

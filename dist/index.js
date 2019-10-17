@@ -1,7 +1,5 @@
 import React from "react";
-import "./styles.css"; // import yarn from "./yarn.png";
-// import lambs from "./lambs.png";
-// import sheep from "./sheep-herd.png";
+import "./styles.css";
 
 class CustomCarousel extends React.Component {
   constructor(props) {
@@ -17,15 +15,13 @@ class CustomCarousel extends React.Component {
       currentSlide: 0,
       counterInterval: 0,
       slideInterval: 0
-    }; // const counterInterval = 0;
-    // const slideInterval = 0;
+    };
   }
 
   incrementValue() {
     this.setState(prevState => ({
       currentSlide: (prevState.currentSlide + 1) % this.state.slides.length
     }));
-    console.log(this.state.currentSlide);
   }
 
   incrementSlide() {
@@ -46,10 +42,6 @@ class CustomCarousel extends React.Component {
         return dot.classList.remove("current-dot");
       }
     });
-  }
-
-  incrementDot() {
-    let dots = document.querySelectorAll(".dots");
   }
 
   nextSlide(index) {
@@ -81,8 +73,10 @@ class CustomCarousel extends React.Component {
   }
 
   componentDidMount() {
-    this.state.counterInterval = setInterval(this.incrementValue, 3000);
-    this.state.slideInterval = setInterval(this.incrementSlide, 3000);
+    this.setState({
+      counterInterval: setInterval(this.incrementValue, 3000),
+      slideInterval: setInterval(this.incrementSlide, 3000)
+    });
   }
 
   componentWillUnmount() {
@@ -94,26 +88,54 @@ class CustomCarousel extends React.Component {
     return React.createElement("div", {
       className: "custom-carousel"
     }, React.createElement("div", {
-      className: "carousel-container"
+      className: "carousel-container",
+      style: {
+        width: this.props.width,
+        height: this.props.height
+      }
     }, React.createElement("div", {
       className: "carousel-slides showing"
-    }, React.createElement("img", {
+    }, this.props.img1 ? React.createElement("img", {
       className: "carousel",
       src: this.props.img1,
       alt: ""
-    })), React.createElement("div", {
+    }) : React.createElement("video", {
+      autoplay: true,
+      muted: true,
+      loop: true,
+      controlsList: "nodownload"
+    }, React.createElement("source", {
+      src: this.props.vid1,
+      type: "video/mp4"
+    }))), React.createElement("div", {
       className: "carousel-slides"
-    }, React.createElement("img", {
+    }, this.props.img2 ? React.createElement("img", {
       className: "carousel",
       src: this.props.img2,
       alt: ""
-    })), React.createElement("div", {
+    }) : React.createElement("video", {
+      controlsList: "nodownload",
+      autoPlay: true,
+      muted: true,
+      loop: true
+    }, React.createElement("source", {
+      src: this.props.vid2,
+      type: "video/mp4"
+    }))), React.createElement("div", {
       className: "carousel-slides"
-    }, React.createElement("img", {
+    }, this.props.img3 ? React.createElement("img", {
       className: "carousel",
       src: this.props.img3,
       alt: ""
-    }))), this.props.dots && React.createElement("div", {
+    }) : React.createElement("video", {
+      autoplay: true,
+      muted: true,
+      loop: true,
+      controlsList: "nodownload"
+    }, React.createElement("source", {
+      src: this.props.vid3,
+      type: "video/mp4"
+    })))), this.props.dots && React.createElement("div", {
       className: "carousel-dots"
     }, this.state.slides.map(val => {
       if (val === 1) {
