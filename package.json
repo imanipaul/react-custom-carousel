@@ -1,6 +1,6 @@
 {
-  "name": "react-custom-carousel",
-  "version": "0.1.6",
+  "name": "@courageous/react-custom-carousel",
+  "version": "0.1.0",
   "private": false,
   "dependencies": {
     "react": "^16.10.2",
