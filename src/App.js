@@ -1,6 +1,5 @@
 import React from "react";
 import CustomCarousel from "./Component/index";
-import yarn from "./yarn.png";
 import lambs from "./lambs.png";
 import sheep from "./sheep-herd.png";
 import loopvid from "./loop-cutdown.mp4";
