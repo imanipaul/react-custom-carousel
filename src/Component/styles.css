@@ -9,10 +9,15 @@
   text-align: center;
 }
 
+.carousel-caption{
+  /* opacity: 0; */
+  transition: opacity 1s;
+}
+
 .carousel-dots {
   display: flex;
   flex-direction: row;
-  margin: auto;
+  /* margin: auto; */
 }
 
 .current-dot {
@@ -22,7 +27,7 @@
 .carousel-container {
   position: relative;
   list-style-type: none;
-  height: 500px;
+  /* height: 500px; */
   width: 60%;
 }
 .carousel-slides {
@@ -56,8 +61,24 @@
 }
 
 .custom-carousel {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
+.left-arrow, .right-arrow{
+  width: 50px;
+  height: 50px;
+}
+
+.custom-carousel-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
