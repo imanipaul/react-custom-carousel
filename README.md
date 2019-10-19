@@ -11,17 +11,13 @@ Then run `npm publish` to publish package to npm -->
 
 ### Props:
 
-The component accepts three main props:
+The component accepts the following props:
 
-**Images**
+**Assets**
 
-_Images to be included in carousel_
+_Assets to be included in carousel_
 
-- img1: path to first image
-
-- img2: path to second image
-
-- img3: path to third image
+- An array of assets to be looped through in carousel
 
 **Sizing**
 
@@ -35,4 +31,10 @@ _Set the size of the carousel_
 
 _Determines if tracking dots are viewable below carousel_
 
-dots: boolean value (default false)
+- dots: boolean value (default false)
+
+**Duration**
+
+_Set the amount of time each slide remains visible_
+
+- duration: value in ms (ex: use 3000 for 3s)

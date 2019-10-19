@@ -10,13 +10,13 @@ function App() {
   return (
     <div className="App">
       <CustomCarousel
-        img1={lambs}
+        // img1={lambs}
         // img2={yarn}
-        vid2={loopvid}
-        img3={sheep}
+        // vid2={loopvid}
+        // img3={sheep}
         width={940}
         height={525}
-        dots={false}
+        dots={true}
         assets={[lambs, loopvid, yarn, sheep, yarn, sheep]}
         duration={3000}
       />

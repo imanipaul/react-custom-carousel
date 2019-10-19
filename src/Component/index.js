@@ -47,14 +47,15 @@ class CustomCarousel extends React.Component {
         });
     }
 
-    nextSlide(index) {
+    nextSlide = (event) => {
+        console.log(event.target.getAttribute('value'))
         clearInterval(this.state.counterInterval);
         clearInterval(this.state.slideInterval);
         this.setState({
-            currentSlide: index
+            currentSlide: event.target.getAttribute('value')
         });
-        this.setSlide(index);
-        this.setDot(index);
+        this.setSlide(event.target.getAttribute('value'));
+        this.setDot(event.target.getAttribute('value'));
     }
 
     setSlide(val) {
@@ -62,7 +63,7 @@ class CustomCarousel extends React.Component {
         slides.forEach(function (slide) {
             return slide.classList.remove("showing");
         });
-        slides[val - 1].classList.add("showing");
+        slides[val].classList.add("showing");
     }
 
     setDot(val) {
@@ -70,16 +71,16 @@ class CustomCarousel extends React.Component {
         dots.forEach(function (dot) {
             return dot.classList.remove("current-dot");
         });
-        console.log("dots: ", dots);
-        console.log("dots val: ", dots[val - 1]);
-        dots[val - 1].classList.add("current-dot");
+        // console.log("dots: ", dots);
+        // console.log("dots val: ", dots[val - 1]);
+        dots[val].classList.add("current-dot");
     }
 
     getFileTypes() {
         let fileTypes = this.props.assets.map(function (asset) {
 
             let extension = asset.slice((Math.max(0, asset.lastIndexOf(".")) || Infinity) + 1);
-            console.log('extension is: ', extension)
+            // console.log('extension is: ', extension)
 
             let fileInfo = {}
 
@@ -96,7 +97,7 @@ class CustomCarousel extends React.Component {
 
         })
 
-        console.log('fileTypes is: ', fileTypes)
+        // console.log('fileTypes is: ', fileTypes)
 
         return fileTypes
     }
@@ -104,7 +105,7 @@ class CustomCarousel extends React.Component {
     renderSlides() {
 
         return this.state.files.map(function (file, index) {
-            console.log(file['type'])
+            // console.log(file['type'])
             if (file['type'] === 'video') {
                 return (
                     <div key={index} className={index === 0 ? 'carousel-slides showing' : 'carousel-slides'}>
@@ -148,53 +149,9 @@ class CustomCarousel extends React.Component {
                 >
 
                     {this.state.files && this.renderSlides()}
-                    {/* <div className="carousel-slides showing">
-            {this.props.img1 ? (
-              <img className="carousel" src={this.props.img1} alt="" />
-            ) : (
-              <video autoplay muted loop controlsList="nodownload">
-                <source src={this.props.vid1} type="video/mp4" />
-              </video>
-            )}
-          </div>
-          <div className="carousel-slides">
-            {this.props.img2 ? (
-              <img className="carousel" src={this.props.img2} alt="" />
-            ) : (
-              <video controlsList="nodownload" autoPlay muted loop>
-                <source src={this.props.vid2} type="video/mp4" />
-              </video>
-            )}
-          </div>
-          <div className="carousel-slides">
-            {this.props.img3 ? (
-              <img className="carousel" src={this.props.img3} alt="" />
-            ) : (
-              <video autoplay muted loop controlsList="nodownload">
-                <source src={this.props.vid3} type="video/mp4" />
-              </video>
-            )}
-          </div> */}
-                    {/* {console.log(this.props.assets)} */}
-                    {/* {this.props.assets.map(function (asset, index) {
-                        // console.log(asset)
-                        if (index === 0) {
-                            return (<div key={index} className="carousel-slides showing">
-                                <img className="carousel" src={asset} alt="" />
-                            </div>)
-                        }
-                        else {
-                            return (
-                                <div key={index} className="carousel-slides ">
-                                    <img className="carousel" src={asset} alt="" />
-                                </div>
-                            )
-                        }
-                    })} */}
-
 
                 </div>
-                {this.props.dots && (
+                {/* {this.props.dots && (
                     <div className="carousel-dots">
                         {this.state.slides.map(val => {
                             if (val === 1) {
@@ -215,6 +172,21 @@ class CustomCarousel extends React.Component {
                                     className="dot"
                                 ></div>
                             );
+                        })}
+                    </div>
+                )} */}
+
+                {this.props.dots && (
+                    <div className='carousel-dots'>
+                        {this.props.assets.map((val, i) => {
+                            return (
+                                <div
+                                    key={i}
+                                    value={i}
+                                    id={`dot${i}`}
+                                    className={i === 0 ? 'dot carousel-dot' : 'dot'}
+                                    onClick={(e) => this.nextSlide(e)}
+                                ></div>)
                         })}
                     </div>
                 )}
