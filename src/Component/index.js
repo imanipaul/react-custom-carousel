@@ -149,17 +149,19 @@ class CustomCarousel extends React.Component {
 
     render() {
         return (
-            <div className="custom-carousel">
-                <div
-                    className="carousel-container"
-                    style={{ width: this.props.width, height: this.props.height }}
-                >
+            <div className='custom-carousel-container'>
+                {this.props.arrows && <img className='left-arrow' src={this.props.arrows[0]} />}
+                <div className="custom-carousel">
+                    <div
+                        className="carousel-container"
+                        style={{ width: this.props.width, height: this.props.height }}
+                    >
+                        {this.state.files && this.renderSlides()}
+                    </div>
 
-                    {this.state.files && this.renderSlides()}
-
+                    {this.props.dots && this.renderDots()}
                 </div>
-
-                {this.props.dots && this.renderDots()}
+                {this.props.arrows && <img className='right-arrow' src={this.props.arrows[1]} />}
             </div>
         );
     }
