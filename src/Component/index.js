@@ -9,6 +9,8 @@ class CustomCarousel extends React.Component {
         this.setSlide = this.setSlide.bind(this);
         this.nextSlide = this.nextSlide.bind(this);
         this.setDot = this.setDot.bind(this);
+        this.getFileTypes = this.getFileTypes.bind(this);
+        this.renderSlides = this.renderSlides.bind(this);
 
         this.state = {
             slides: [1, 2, 3],
@@ -73,11 +75,63 @@ class CustomCarousel extends React.Component {
         dots[val - 1].classList.add("current-dot");
     }
 
+    getFileTypes() {
+        let fileTypes = this.props.assets.map(function (asset) {
+
+            let extension = asset.slice((Math.max(0, asset.lastIndexOf(".")) || Infinity) + 1);
+            console.log('extension is: ', extension)
+
+            let fileInfo = {}
+
+            if (extension === 'mov' || extension === 'mp4') {
+                fileInfo['type'] = 'video'
+                fileInfo['asset'] = asset
+                return fileInfo
+            }
+            else {
+                fileInfo['type'] = 'image'
+                fileInfo['asset'] = asset
+                return fileInfo
+            }
+
+        })
+
+        console.log('fileTypes is: ', fileTypes)
+
+        return fileTypes
+    }
+
+    renderSlides() {
+
+        return this.state.files.map(function (file, index) {
+            console.log(file['type'])
+            if (file['type'] === 'video') {
+                return (
+                    <div key={index} className={index === 0 ? 'carousel-slides showing' : 'carousel-slides'}>
+                        <video muted loop controlsList="nodownload" autoPlay controls>
+                            <source src={file['asset']} type="video/mp4" />
+                        </video>
+                    </div>)
+            }
+            else {
+                return (
+                    <div key={index} className={index === 0 ? 'carousel-slides showing' : 'carousel-slides'}>
+                        <img className="carousel" src={file['asset']} alt="" />
+                    </div>)
+            }
+        })
+
+    }
+
+
+
     componentDidMount() {
         this.setState({
-            counterInterval: setInterval(this.incrementValue, 3000),
-            slideInterval: setInterval(this.incrementSlide, 3000)
+            counterInterval: setInterval(this.incrementValue, this.props.duration),
+            slideInterval: setInterval(this.incrementSlide, this.props.duration),
+            files: this.getFileTypes()
         });
+
     }
 
     componentWillUnmount() {
@@ -92,6 +146,8 @@ class CustomCarousel extends React.Component {
                     className="carousel-container"
                     style={{ width: this.props.width, height: this.props.height }}
                 >
+
+                    {this.state.files && this.renderSlides()}
                     {/* <div className="carousel-slides showing">
             {this.props.img1 ? (
               <img className="carousel" src={this.props.img1} alt="" />
@@ -119,21 +175,24 @@ class CustomCarousel extends React.Component {
               </video>
             )}
           </div> */}
-
-                    {this.props.assets.map(function (asset, index) {
+                    {/* {console.log(this.props.assets)} */}
+                    {/* {this.props.assets.map(function (asset, index) {
+                        // console.log(asset)
                         if (index === 0) {
-                            return (<div className="carousel-slides showing">
+                            return (<div key={index} className="carousel-slides showing">
                                 <img className="carousel" src={asset} alt="" />
                             </div>)
                         }
                         else {
                             return (
-                                <div className="carousel-slides ">
+                                <div key={index} className="carousel-slides ">
                                     <img className="carousel" src={asset} alt="" />
                                 </div>
                             )
                         }
-                    })}
+                    })} */}
+
+
                 </div>
                 {this.props.dots && (
                     <div className="carousel-dots">

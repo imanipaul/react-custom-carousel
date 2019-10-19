@@ -17,7 +17,8 @@ function App() {
         width={940}
         height={525}
         dots={false}
-        assets={[lambs, sheep, yarn, sheep, yarn, sheep]}
+        assets={[lambs, loopvid, yarn, sheep, yarn, sheep]}
+        duration={3000}
       />
     </div>
   );
