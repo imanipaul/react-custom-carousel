@@ -7,11 +7,12 @@ class CustomCarousel extends React.Component {
         this.incrementSlide = this.incrementSlide.bind(this);
         this.incrementValue = this.incrementValue.bind(this);
         this.setSlide = this.setSlide.bind(this);
-        this.nextSlide = this.nextSlide.bind(this);
+        this.changeSlide = this.changeSlide.bind(this);
         this.setDot = this.setDot.bind(this);
         this.getFileTypes = this.getFileTypes.bind(this);
         this.renderSlides = this.renderSlides.bind(this);
         this.renderDots = this.renderDots.bind(this);
+        this.nextSlide = this.nextSlide.bind(this);
 
         this.state = {
             slides: [1, 2, 3],
@@ -48,12 +49,11 @@ class CustomCarousel extends React.Component {
         });
     }
 
-    nextSlide = (event) => {
-        console.log(event.target.getAttribute('value'))
+    changeSlide = (event) => {
         clearInterval(this.state.counterInterval);
         clearInterval(this.state.slideInterval);
         this.setState({
-            currentSlide: event.target.getAttribute('value')
+            currentSlide: parseInt(event.target.getAttribute('value'))
         });
         this.setSlide(event.target.getAttribute('value'));
         this.setDot(event.target.getAttribute('value'));
@@ -65,6 +65,17 @@ class CustomCarousel extends React.Component {
             return slide.classList.remove("showing");
         });
         slides[val].classList.add("showing");
+    }
+
+
+    nextSlide() {
+        clearInterval(this.state.counterInterval);
+        clearInterval(this.state.slideInterval);
+        this.setState(prevState => ({
+            currentSlide: (prevState.currentSlide + 1) % this.props.assets.length
+        }));
+        this.setSlide((this.state.currentSlide + 1) % this.props.assets.length);
+        this.setDot((this.state.currentSlide + 1) % this.props.assets.length)
     }
 
     setDot(val) {
@@ -127,7 +138,7 @@ class CustomCarousel extends React.Component {
                         value={i}
                         id={`dot${i}`}
                         className={i === 0 ? 'dot current-dot' : 'dot'}
-                        onClick={(e) => this.nextSlide(e)}
+                        onClick={(e) => this.changeSlide(e)}
                     ></div>)
             })}
         </div>)
@@ -150,7 +161,13 @@ class CustomCarousel extends React.Component {
     render() {
         return (
             <div className='custom-carousel-container'>
-                {this.props.arrows && <img className='left-arrow' src={this.props.arrows[0]} />}
+                {this.props.arrows
+                    &&
+                    <img
+                        onClick={this.nextSlide}
+                        className='left-arrow'
+                        src={this.props.arrows[0]} />
+                }
                 <div className="custom-carousel">
                     <div
                         className="carousel-container"
@@ -161,7 +178,14 @@ class CustomCarousel extends React.Component {
 
                     {this.props.dots && this.renderDots()}
                 </div>
-                {this.props.arrows && <img className='right-arrow' src={this.props.arrows[1]} />}
+                {this.props.arrows
+                    &&
+                    <img
+                        onClick={this.nextSlide}
+                        className='right-arrow'
+                        src={this.props.arrows[1]}
+                        alt="Right Arrow" />
+                }
             </div>
         );
     }
