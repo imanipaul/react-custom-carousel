@@ -11,6 +11,7 @@ class CustomCarousel extends React.Component {
         this.setDot = this.setDot.bind(this);
         this.getFileTypes = this.getFileTypes.bind(this);
         this.renderSlides = this.renderSlides.bind(this);
+        this.renderDots = this.renderDots.bind(this);
 
         this.state = {
             slides: [1, 2, 3],
@@ -71,8 +72,6 @@ class CustomCarousel extends React.Component {
         dots.forEach(function (dot) {
             return dot.classList.remove("current-dot");
         });
-        // console.log("dots: ", dots);
-        // console.log("dots val: ", dots[val - 1]);
         dots[val].classList.add("current-dot");
     }
 
@@ -80,7 +79,6 @@ class CustomCarousel extends React.Component {
         let fileTypes = this.props.assets.map(function (asset) {
 
             let extension = asset.slice((Math.max(0, asset.lastIndexOf(".")) || Infinity) + 1);
-            // console.log('extension is: ', extension)
 
             let fileInfo = {}
 
@@ -97,15 +95,11 @@ class CustomCarousel extends React.Component {
 
         })
 
-        // console.log('fileTypes is: ', fileTypes)
-
         return fileTypes
     }
 
     renderSlides() {
-
         return this.state.files.map(function (file, index) {
-            // console.log(file['type'])
             if (file['type'] === 'video') {
                 return (
                     <div key={index} className={index === 0 ? 'carousel-slides showing' : 'carousel-slides'}>
@@ -124,7 +118,20 @@ class CustomCarousel extends React.Component {
 
     }
 
-
+    renderDots() {
+        return (<div className='carousel-dots'>
+            {this.props.assets.map((val, i) => {
+                return (
+                    <div
+                        key={i}
+                        value={i}
+                        id={`dot${i}`}
+                        className={i === 0 ? 'dot current-dot' : 'dot'}
+                        onClick={(e) => this.nextSlide(e)}
+                    ></div>)
+            })}
+        </div>)
+    }
 
     componentDidMount() {
         this.setState({
@@ -151,45 +158,8 @@ class CustomCarousel extends React.Component {
                     {this.state.files && this.renderSlides()}
 
                 </div>
-                {/* {this.props.dots && (
-                    <div className="carousel-dots">
-                        {this.state.slides.map(val => {
-                            if (val === 1) {
-                                return (
-                                    <div
-                                        key={val}
-                                        id={`dot${val}`}
-                                        className="dot current-dot"
-                                        onClick={() => this.nextSlide(val)}
-                                    ></div>
-                                );
-                            }
-                            return (
-                                <div
-                                    onClick={() => this.nextSlide(val)}
-                                    key={val}
-                                    id={`dot${val}`}
-                                    className="dot"
-                                ></div>
-                            );
-                        })}
-                    </div>
-                )} */}
 
-                {this.props.dots && (
-                    <div className='carousel-dots'>
-                        {this.props.assets.map((val, i) => {
-                            return (
-                                <div
-                                    key={i}
-                                    value={i}
-                                    id={`dot${i}`}
-                                    className={i === 0 ? 'dot carousel-dot' : 'dot'}
-                                    onClick={(e) => this.nextSlide(e)}
-                                ></div>)
-                        })}
-                    </div>
-                )}
+                {this.props.dots && this.renderDots()}
             </div>
         );
     }
