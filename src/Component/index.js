@@ -31,6 +31,7 @@ class CustomCarousel extends React.Component {
     incrementSlide() {
         let slides = document.querySelectorAll(".carousel-slides");
         let dots = document.querySelectorAll(".dot");
+        let captions = document.querySelectorAll('.carousel-caption')
         let value = this.state.currentSlide;
         slides.forEach(function (slide, index) {
             if (index === value) {
@@ -47,6 +48,7 @@ class CustomCarousel extends React.Component {
                 return dot.classList.remove("current-dot");
             }
         });
+        // this.renderCaptions(this.props.captions[value])
     }
 
     changeSlide = (event) => {
@@ -85,6 +87,7 @@ class CustomCarousel extends React.Component {
         });
         dots[val].classList.add("current-dot");
     }
+
 
     getFileTypes() {
         let fileTypes = this.props.assets.map(function (asset) {
@@ -144,6 +147,14 @@ class CustomCarousel extends React.Component {
         </div>)
     }
 
+    renderCaptions() {
+        return (
+            <div className='carousel-caption' style={this.props.captionStyles}>
+                <div>{this.props.captions[this.state.currentSlide]}</div>
+            </div>
+        )
+    }
+
     componentDidMount() {
         this.setState({
             counterInterval: setInterval(this.incrementValue, this.props.duration),
@@ -175,6 +186,8 @@ class CustomCarousel extends React.Component {
                     >
                         {this.state.files && this.renderSlides()}
                     </div>
+
+                    {this.props.captions && this.renderCaptions()}
 
                     {this.props.dots && this.renderDots()}
                 </div>

@@ -12,16 +12,14 @@ function App() {
   return (
     <div className="App">
       <CustomCarousel
-        // img1={lambs}
-        // img2={yarn}
-        // vid2={loopvid}
-        // img3={sheep}
         width={940}
         height={525}
         dots={true}
         assets={[lambs, loopvid, yarn, sheep, yarn, sheep]}
         duration={3000}
         arrows={[leftArrow, rightArrow]}
+        captions={['slide1', 'slide2', 'slide3', 'slide4', 'slide5', 'slide6',]}
+      // captionStyles={{ color: 'red', border: '1px solid black' }}
       />
     </div>
   );

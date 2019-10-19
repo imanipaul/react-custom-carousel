@@ -9,6 +9,11 @@
   text-align: center;
 }
 
+.carousel-caption{
+  /* opacity: 0; */
+  transition: opacity 1s;
+}
+
 .carousel-dots {
   display: flex;
   flex-direction: row;
@@ -74,3 +79,6 @@
   align-items: center;
   justify-content: center;
 }
+
+
+
