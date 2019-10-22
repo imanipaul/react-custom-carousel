@@ -19,6 +19,8 @@ function App() {
         duration={3000}
         arrows={[leftArrow, rightArrow]}
         captions={['slide1', 'slide2', 'slide3', 'slide4', 'slide5', 'slide6',]}
+        controls={false}
+        // attributes={'muted loqop'}
       // captionStyles={{ color: 'red', border: '1px solid black' }}
       />
     </div>

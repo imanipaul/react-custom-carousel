@@ -31,7 +31,6 @@ class CustomCarousel extends React.Component {
   incrementSlide() {
     let slides = document.querySelectorAll(".carousel-slides");
     let dots = document.querySelectorAll(".dot");
-    let captions = document.querySelectorAll(".carousel-caption");
     let value = this.state.currentSlide;
     slides.forEach(function(slide, index) {
       if (index === value) {
@@ -48,10 +47,9 @@ class CustomCarousel extends React.Component {
         return dot.classList.remove("current-dot");
       }
     });
-    // this.renderCaptions(this.props.captions[value])
   }
 
-  changeSlide = event => {
+  changeSlide(event) {
     clearInterval(this.state.counterInterval);
     clearInterval(this.state.slideInterval);
     this.setState({
@@ -110,7 +108,7 @@ class CustomCarousel extends React.Component {
   }
 
   renderSlides() {
-    return this.state.files.map(function(file, index) {
+    return this.state.files.map((file, index) => {
       if (file["type"] === "video") {
         return (
           <div
@@ -124,7 +122,7 @@ class CustomCarousel extends React.Component {
               loop
               controlsList="nodownload"
               autoPlay
-              controls
+              controls={this.props.controls}
               playsInline
             >
               <source src={file["asset"]} type="video/mp4" />
