@@ -38,3 +38,20 @@ _Determines if tracking dots are viewable below carousel_
 _Set the amount of time each slide remains visible_
 
 - duration: value in ms (ex: use 3000 for 3s)
+
+**Arrows**
+
+_Set custom arrows for the carousel_
+
+- arrows: array of two elements, [left arrow image, right arrow image]
+
+**Captions**
+
+_Set custom captions for each slide in the carousel_
+
+- captions: array of strings, each element is a caption for the corresponding image at that index
+
+**Controls**
+_Determines if HTML5 video controls are shown_
+
+- controls: boolean value (default true)
