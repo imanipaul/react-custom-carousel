@@ -9,7 +9,7 @@
   text-align: center;
 }
 
-.carousel-caption{
+.carousel-caption {
   /* opacity: 0; */
   transition: opacity 1s;
 }
@@ -68,7 +68,8 @@
   justify-content: center;
 }
 
-.left-arrow, .right-arrow{
+.left-arrow,
+.right-arrow {
   width: 50px;
   height: 50px;
 }
@@ -80,5 +81,22 @@
   justify-content: center;
 }
 
+/* hooks styles */
 
+.appear {
+  /* display: block; */
+  opacity: 1;
+  z-index: 2;
+  transition: opacity 1s ease;
+}
 
+.hidden {
+  opacity: 0;
+  z-index: 1;
+  /* display: none; */
+  transition: opacity 0.5s ease;
+}
+
+.carousel-background {
+  transition: background 0.5s ease;
+}

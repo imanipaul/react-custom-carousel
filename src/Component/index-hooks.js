@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
 
 class CustomCarousel extends React.Component {
@@ -15,20 +15,18 @@ class CustomCarousel extends React.Component {
     this.nextSlide = this.nextSlide.bind(this);
 
     this.state = {
+      slides: [1, 2, 3],
       currentSlide: 0,
       counterInterval: 0,
       slideInterval: 0
     };
   }
 
-  //Increments the value of the current slide state
   incrementValue() {
     this.setState(prevState => ({
       currentSlide: (prevState.currentSlide + 1) % this.props.assets.length
     }));
   }
-
-  //imcrements the slide
 
   incrementSlide() {
     let slides = document.querySelectorAll(".carousel-slides");
@@ -51,8 +49,6 @@ class CustomCarousel extends React.Component {
     });
   }
 
-  //changes viewed slide on event (click), also clears interval
-
   changeSlide(event) {
     clearInterval(this.state.counterInterval);
     clearInterval(this.state.slideInterval);
@@ -63,7 +59,6 @@ class CustomCarousel extends React.Component {
     this.setDot(event.target.getAttribute("value"));
   }
 
-  //
   setSlide(val) {
     let slides = document.querySelectorAll(".carousel-slides");
     slides.forEach(function(slide) {
