@@ -99,4 +99,12 @@
 
 .carousel-background {
   transition: background 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+}
+
+.carousel-mask {
+  width: 940px;
+  height: 525px;
+  position: absolute;
+  left: 50%;
 }
