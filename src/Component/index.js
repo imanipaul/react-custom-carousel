@@ -29,8 +29,8 @@ class CustomCarousel extends React.Component {
   }
 
   incrementSlide() {
-    let slides = document.querySelectorAll(".carousel-slides");
-    let dots = document.querySelectorAll(".dot");
+    let slides = document.querySelectorAll(`.${this.props.slidesClass}`);
+    let dots = document.querySelectorAll(`.${this.props.dotsClass}`);
     let value = this.state.currentSlide;
     slides.forEach(function(slide, index) {
       if (index === value) {
@@ -57,10 +57,10 @@ class CustomCarousel extends React.Component {
     });
     this.setSlide(event.target.getAttribute("value"));
     this.setDot(event.target.getAttribute("value"));
-  };
+  }
 
   setSlide(val) {
-    let slides = document.querySelectorAll(".carousel-slides");
+    let slides = document.querySelectorAll(`.${this.props.slidesClass}`);
     slides.forEach(function(slide) {
       return slide.classList.remove("showing");
     });
@@ -78,7 +78,7 @@ class CustomCarousel extends React.Component {
   }
 
   setDot(val) {
-    let dots = document.querySelectorAll(".dot");
+    let dots = document.querySelectorAll(`.${this.props.dotsClass}`);
     dots.forEach(function(dot) {
       return dot.classList.remove("current-dot");
     });
@@ -114,7 +114,9 @@ class CustomCarousel extends React.Component {
           <div
             key={index}
             className={
-              index === 0 ? "carousel-slides showing" : "carousel-slides"
+              index === 0
+                ? `carousel-slides ${this.props.slidesClass} showing`
+                : `carousel-slides ${this.props.slidesClass}`
             }
           >
             <video
@@ -134,7 +136,9 @@ class CustomCarousel extends React.Component {
           <div
             key={index}
             className={
-              index === 0 ? "carousel-slides showing" : "carousel-slides"
+              index === 0
+                ? `carousel-slides ${this.props.slidesClass} showing`
+                : `carousel-slides ${this.props.slidesClass}`
             }
           >
             <img className="carousel" src={file["asset"]} alt="" />
@@ -153,7 +157,11 @@ class CustomCarousel extends React.Component {
               key={i}
               value={i}
               id={`dot${i}`}
-              className={i === 0 ? "dot current-dot" : "dot"}
+              className={
+                i === 0
+                  ? `dot ${this.props.dotsClass} current-dot`
+                  : `${this.props.dotsClass} dot`
+              }
               onClick={e => this.changeSlide(e)}
             ></div>
           );

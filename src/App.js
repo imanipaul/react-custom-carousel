@@ -18,9 +18,32 @@ function App() {
         assets={[lambs, loopvid, yarn, sheep, yarn, sheep]}
         duration={3000}
         arrows={[leftArrow, rightArrow]}
-        captions={['slide1', 'slide2', 'slide3', 'slide4', 'slide5', 'slide6',]}
+        captions={["slide1", "slide2", "slide3", "slide4", "slide5", "slide6"]}
+        slidesClass={"carousel-slides1"}
+        dotsClass={"dot1"}
         controls={false}
       />
+      <div className="second">
+        <CustomCarousel
+          width={940}
+          height={525}
+          dots={true}
+          assets={[lambs, loopvid, yarn, sheep, yarn, sheep]}
+          duration={3000}
+          arrows={[leftArrow, rightArrow]}
+          captions={[
+            "slide1",
+            "slide2",
+            "slide3",
+            "slide4",
+            "slide5",
+            "slide6"
+          ]}
+          controls={false}
+          slidesClass={"carousel-slides2"}
+          dotsClass={"dot2"}
+        />
+      </div>
     </div>
   );
 }
